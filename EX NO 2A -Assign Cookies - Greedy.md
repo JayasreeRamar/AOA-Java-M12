@@ -1,52 +1,49 @@
-# EX 2B Jump Game using Greedy Algorithm.
+# EX 2A Assign Cookies using Greedy Algorithm.
 
 ## DATE: 08-09-2026
 
 ## AIM:
 
-To write a Java program to for given constraints.
-You are given an array of integers. Each number represents the maximum number of steps you can jump forward from that position.
+To Write a Java program for the following Constraints.
+Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie.
 
-You start from the first element (index 0).
-Write a program to find the minimum number of jumps required to reach the last index of the array.
-
-If it is not possible to reach the end, return -1.
+Each child i has a greed factor g[i], which is the minimum size of a cookie that the child will be content with; and each cookie j has a size s[j]. If s[j] >= g[i], we can assign the cookie j to the child i, and the child i will be content. Your goal is to maximise the number of your content children and output the maximum number.
 
 ## Algorithm
 
-1. Track the farthest reachable index while scanning the array from left to right.
-2. If the current index ever exceeds the farthest reachable position, return false.
-3. Update the reachable position using max(pos, i + nums[i]) at each step.
-4. Continue expanding the maximum jump window as long as reachable.
-5. If the loop finishes without failing, the last index is reachable.
+1. Sort the children’s greed factors and cookie sizes in non-decreasing order.
+2. Use two pointers to try matching each child with the smallest possible cookie.
+3. Move the cookie pointer forward for every cookie checked.
+4. Increase the child pointer only when a cookie can satisfy that child’s greed.
+5. Return the total number of children successfully matched with cookies.
 
 ## Program:
 
 ```java
 import java.util.*;
 
-public class JumpGame {
+public class AssignCookies {
 
-    // Function to check if we can reach the last index
-    public static boolean canReachLastIndex(int[] nums) {
-        int pos=0;
-        for(int i=0;i<nums.length;i++){
-            if(i>pos)return false;
-            pos=Math.max(pos,i+nums[i]);
+    public static int findContentChildren(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+
+        int i=0;
+        for(int j=0;i<g.length && j<s.length;j++){
+            if(g[i]<=s[j])i++;
         }
-        return true;
+        return i;
     }
 
-    // Main method for input and calling the function
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt(); // Size of array
-        int[] nums = new int[n];
-        for (int i = 0; i < n; i++) {
-            nums[i] = sc.nextInt(); // Elements of array
-        }
-
-        System.out.println("Can reach last index: " + canReachLastIndex(nums));
+        int n = sc.nextInt();
+        int[] g = new int[n];
+        for (int i = 0; i < n; i++) g[i] = sc.nextInt();
+        int m = sc.nextInt();
+        int[] s = new int[m];
+        for (int i = 0; i < m; i++) s[i] = sc.nextInt();
+        System.out.println(findContentChildren(g, s));
     }
 }
 
@@ -54,8 +51,8 @@ public class JumpGame {
 
 ## Output:
 
-<img width="740" height="253" alt="image" src="https://github.com/user-attachments/assets/26a8779c-2ed8-4eed-8ee4-889b63aeb391" />
+<img width="360" height="349" alt="image" src="https://github.com/user-attachments/assets/588167b3-0926-401c-b356-2bc3ced77f43" />
 
 ## Result:
 
-The program successfully implemented and the expected output is verified.
+The program successfully print all the numbers from 1 to N.
