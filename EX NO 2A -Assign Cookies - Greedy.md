@@ -1,11 +1,6 @@
 # EX 2A Assign Cookies using Greedy Algorithm.
 
 ## DATE: 08-09-2026
-
-### Developed By: PAVITHRA S
-
-### Register Number: 212223230147
-
 ## AIM:
 
 To Write a Java program for the following Constraints.
